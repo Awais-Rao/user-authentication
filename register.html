@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+</head>
+
+<body>
+
+    <div id="register-response"></div>
+
+    <h1>Register Form</h1>
+    <form id="login-form">
+        <label for="email">Email</label>
+        <input type="text" id="email" placeholder="abc@gmail.com">
+        <br>
+        <label for="password">Password</label>
+        <input type="password" id="password">
+        <br>
+        <label for="con-password">Confirm Password</label>
+        <input type="password" id="con-password">
+        <br>
+
+        <button type="submit">Register</button>
+
+        <br>
+        <p>Already have an account ? <a href="index.html">Login</a></p>
+
+    </form>
+
+</body>
+
+<script>
+
+const message = document.getElementById('register-response');
+
+
+    $(document).ready(function() {
+    
+        $('#login-form').submit(function(e){
+            e.preventDefault();
+
+            var email = $('#email').val();
+            var password = $('#password').val();
+            var con_password = $('#con-password').val();
+
+            if (password == con_password) {
+                
+                $.ajax({
+                    url: 'register.php',
+                    type: 'POST',
+                    data: {
+                        email: email,
+                        password: password
+                    },
+
+                    success: function(response){
+                        message.innerText = response;
+                    }
+
+                })
+            }else{
+                message.innerText = "Password dont match";
+            }
+        })
+    
+    })
+    
+</script>
+
+</html>
