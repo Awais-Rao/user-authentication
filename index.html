@@ -10,6 +10,8 @@
 
 <body>
 
+    <div id="message"></div>
+
     <h1>Login Form</h1>
     <form id="login-form">
         <label for="email">Email</label>
@@ -30,6 +32,36 @@
 </body>
 
 <script>
+
+    const message = document.getElementById('message');
+
+    $(document).ready(function () {
+
+        $('#login-form').submit(function (e) {
+            e.preventDefault();
+
+            var email = $('#email').val();
+            var password = $('#password').val();
+
+            $.ajax({
+                url: 'login.php',
+                type: 'POST',
+                data: {
+                    email: email,
+                    password: password
+                },
+                success: function (response) {
+                    message.innerText = response;
+                }
+
+            }
+            )
+
+        })
+
+    })
+
+
 
 </script>
 

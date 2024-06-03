@@ -14,7 +14,7 @@ if($_SERVER['REQUEST_METHOD'] === 'POST' ){
         $check_user_query = "SELECT email FROM users WHERE email = '$email' LIMIT 1";
         $check_user_query_run = mysqli_query($conn, $check_user_query);
 
-        if(mysqli_num_rows($check_data_query_run) > 0){
+        if(mysqli_num_rows($check_user_query_run) > 0){
             echo "Email already exist.";
         }
         else{
